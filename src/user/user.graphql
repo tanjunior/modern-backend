@@ -1,0 +1,45 @@
+type User {
+  id: String!
+  name: String!
+  posts: [Post!]
+  followers: [User!]
+  followings: [User!]
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+}
+
+input UpdateUserInput {
+  id: String!
+  name: String
+  posts: [PostDetails!]
+  followId: String
+}
+
+input PostDetails {
+  id: String!
+  title: String!
+  authorId: String!
+  publised: Boolean!
+}
+
+input FollowersDetails {
+  id: String!
+}
+
+input FollowingsDetails {
+  id: String!
+}
+
+type Query {
+  users: [User]!
+  user(id: String!): User
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): User
+}
