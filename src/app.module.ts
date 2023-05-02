@@ -7,6 +7,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'path';
 import { PrismaModule } from './prisma/prisma.module';
+import { UserModule } from './user/user.module';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -26,7 +28,9 @@ import { PrismaModule } from './prisma/prisma.module';
         outputAs: 'class'
       },
     }),
-    PrismaModule
+    PrismaModule,
+    UserModule,
+    PostModule
   ],
   controllers: [AppController],
   providers: [AppService],
