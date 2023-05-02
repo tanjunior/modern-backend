@@ -1,6 +1,7 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { PostService } from './post.service';
 import {  CreatePostInput, UpdatePostInput } from 'src/types/graphql';
+import { Post } from './entities/post.entity';
 
 @Resolver('Post')
 export class PostResolver {
@@ -22,8 +23,8 @@ export class PostResolver {
   }
 
   @Mutation('updatePost')
-  update(@Args('updatePostInput') updatePostInput: UpdatePostInput) {
-    return this.postService.update(updatePostInput.id, updatePostInput);
+  update(@Args('updatePostInput') updatePostInput: UpdatePostInput): Promise<Post> {
+    return this.postService.update(updatePostInput);
   }
 
   @Mutation('removePost')

@@ -14,14 +14,19 @@ datasource db {
 model User {
   id        String @id @default(uuid())
   name      String
+  email     String @unique
   posts     Post[]
   followers User[] @relation("UserFollows")
   following User[] @relation("UserFollows")
 }
 
 model Post {
-  id       String @id @default(uuid())
-  title    String @unique
-  authorId String
-  author   User   @relation(fields: [authorId], references: [id], onUpdate: Cascade)
+  id          String   @id @default(uuid())
+  title       String   @unique
+  content     String
+  published   Boolean  @default(false)
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @default(now())
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onUpdate: Cascade)
 }

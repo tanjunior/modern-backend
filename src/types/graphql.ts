@@ -10,30 +10,34 @@
 
 export class CreatePostInput {
     title: string;
+    content: string;
     authorId: string;
 }
 
 export class UpdatePostInput {
     id: string;
-    title: string;
+    title?: Nullable<string>;
+    text?: Nullable<string>;
+    isPublished?: Nullable<boolean>;
 }
 
 export class CreateUserInput {
     name: string;
+    email: string;
 }
 
 export class UpdateUserInput {
     id: string;
     name?: Nullable<string>;
     posts?: Nullable<PostDetails[]>;
-    followers?: Nullable<Nullable<FollowersDetails>[]>;
-    followings?: Nullable<Nullable<FollowingsDetails>[]>;
+    followId?: Nullable<string>;
 }
 
 export class PostDetails {
     id: string;
     title: string;
     authorId: string;
+    publised: boolean;
 }
 
 export class FollowersDetails {
@@ -48,6 +52,7 @@ export class Post {
     id: string;
     title: string;
     authorId: string;
+    publised: boolean;
 }
 
 export abstract class IQuery {
@@ -72,6 +77,10 @@ export abstract class IMutation {
     abstract updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
 
     abstract removeUser(id: string): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export abstract class ISubscription {
+    abstract postCreated(): Nullable<Post> | Promise<Nullable<Post>>;
 }
 
 export class User {

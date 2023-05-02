@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
@@ -23,6 +22,7 @@ import { PostModule } from './post/post.module';
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       typePaths: ['./**/*.graphql'],
+      installSubscriptionHandlers: true,
       definitions: {
         path: join(process.cwd(), 'src/types/graphql.ts'),
         outputAs: 'class'
@@ -32,7 +32,6 @@ import { PostModule } from './post/post.module';
     UserModule,
     PostModule
   ],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule { }

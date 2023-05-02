@@ -2,16 +2,20 @@ type Post {
   id: String!
   title: String!
   authorId: String!
+  publised: Boolean!
 }
 
 input CreatePostInput {
   title: String!
+  content: String!
   authorId: String!
 }
 
 input UpdatePostInput {
-  id: String!
-  title: String!
+  id: ID!
+  title: String
+  text: String
+  isPublished: Boolean
 }
 
 type Query {
@@ -23,4 +27,8 @@ type Mutation {
   createPost(createPostInput: CreatePostInput!): Post!
   updatePost(updatePostInput: UpdatePostInput!): Post!
   removePost(id: String!): Post
+}
+
+type Subscription {
+  postCreated: Post
 }

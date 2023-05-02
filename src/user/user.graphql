@@ -8,20 +8,21 @@ type User {
 
 input CreateUserInput {
   name: String!
+  email: String!
 }
 
 input UpdateUserInput {
   id: String!
   name: String
   posts: [PostDetails!]
-  followers: [FollowersDetails]
-  followings: [FollowingsDetails]
+  followId: String
 }
 
 input PostDetails {
   id: String!
   title: String!
   authorId: String!
+  publised: Boolean!
 }
 
 input FollowersDetails {
